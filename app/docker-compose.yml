@@ -1,9 +1,6 @@
-version: "3.8"
-
 services:
   app:
-    build: .
-    container_name: node-container
+    image: pranay150/devops-cicd-pipeline:latest
     ports:
       - "3000:3000"
     restart: unless-stopped
