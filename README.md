@@ -48,7 +48,7 @@ Every phase is implemented, tested, committed, and documented individually to mi
 | Version Control                 | Git, GitHub                        |
 | Containerization                | Docker                             |
 | Container Orchestration (Local) | Docker Compose                     |
-| Container Registry              | Docker Hub *(Upcoming)*            |
+| Container Registry              | Docker Hub                         |
 | Continuous Integration          | Jenkins *(Upcoming)*               |
 | Infrastructure as Code          | Terraform *(Upcoming)*             |
 | Container Orchestration         | Kubernetes *(Upcoming)*            |
@@ -82,7 +82,7 @@ devops-cicd-pipeline/
 | ✅ Phase 2 – Git & GitHub                | Completed   |
 | ✅ Phase 3 – Docker                      | Completed   |
 | ✅ Phase 4 – Docker Compose              | Completed   |
-| ⏳ Phase 5 – Docker Hub                  | In Progress |
+| ✅ Phase 5 – Docker Hub                  | Completed   |
 | ⏳ Phase 6 – Jenkins CI Pipeline         | Pending     |
 | ⏳ Phase 7 – Terraform                   | Pending     |
 | ⏳ Phase 8 – Kubernetes                  | Pending     |
@@ -128,6 +128,14 @@ devops-cicd-pipeline/
 * Compose networking
 * Centralized configuration
 
+### Docker Hub
+
+* Docker Hub repository creation
+* Docker authentication
+* Docker image tagging
+* Docker image publishing
+* Remote image management
+* Docker Compose integration with Docker Hub images
 ---
 
 # 🐳 Running the Application
@@ -187,7 +195,6 @@ docker compose down
 
 # 🔜 Upcoming Enhancements
 
-* Docker Hub Image Registry
 * Jenkins Automated Builds
 * Terraform Infrastructure
 * Kubernetes Deployment
@@ -209,7 +216,7 @@ Node.js             ██████████ 100%
 Git & GitHub        ██████████ 100%
 Docker              ██████████ 100%
 Docker Compose      ██████████ 100%
-Docker Hub          ░░░░░░░░░░   0%
+Docker Hub          ██████████ 100%
 Jenkins             ░░░░░░░░░░   0%
 Terraform           ░░░░░░░░░░   0%
 Kubernetes          ░░░░░░░░░░   0%
