@@ -1,0 +1,32 @@
+[
+  {
+    "id": "demo-1",
+    "title": "Explore QuantumTask capabilities",
+    "desc": "Hover over this card to see the 3D tilt effect in action! Try checking/unchecking items too.",
+    "category": "ideas",
+    "priority": "high",
+    "dueDate": "2026-07-08",
+    "completed": false,
+    "createdAt": "2026-07-07T11:34:24.420Z"
+  },
+  {
+    "id": "demo-2",
+    "title": "Review codebase structures",
+    "desc": "Examine stylesheet rules, layouts, and DOM event wiring patterns.",
+    "category": "work",
+    "priority": "medium",
+    "dueDate": "2026-07-07",
+    "completed": true,
+    "createdAt": "2026-07-07T10:34:24.420Z"
+  },
+  {
+    "id": "demo-3",
+    "title": "Buy fresh items for cooking",
+    "desc": "Include organic greens, sourdough bread, and coffee beans.",
+    "category": "shopping",
+    "priority": "low",
+    "dueDate": "",
+    "completed": false,
+    "createdAt": "2026-07-07T09:34:24.420Z"
+  }
+]
