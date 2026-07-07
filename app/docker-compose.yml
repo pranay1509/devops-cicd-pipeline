@@ -1,6 +1,0 @@
-services:
-  app:
-    image: pranay150/devops-cicd-pipeline:latest
-    ports:
-      - "3000:3000"
-    restart: unless-stopped

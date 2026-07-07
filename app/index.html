@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumTask // The Ultra-Interactive To-Do List</title>
+  <meta name="description" content="Manage your tasks with stunning 3D hover effects, glassmorphic styling, sound synthesis, and real-time completions.">
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="index.css?v=3">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Particle Canvas for Confetti explosions -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Interactive Grid Shell -->
+  <div class="app-container">
+    
+    <!-- Sidebar Panel -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="brand-name">QuantumTask</span>
+        </div>
+        <div class="brand-tagline">Organize in Style</div>
+      </div>
+
+      <!-- Categories Navigation -->
+      <nav class="categories-nav">
+        <h3 class="section-title">Categories</h3>
+        <ul id="categories-list">
+          <!-- Dynamically populated or static markup -->
+          <li class="category-item active" data-category="all">
+            <span class="category-icon">✦</span>
+            <span class="category-name">All Tasks</span>
+            <span class="category-count" id="count-all">0</span>
+          </li>
+          <li class="category-item" data-category="work">
+            <span class="category-icon" style="color: var(--color-work);">●</span>
+            <span class="category-name">Work</span>
+            <span class="category-count" id="count-work">0</span>
+          </li>
+          <li class="category-item" data-category="personal">
+            <span class="category-icon" style="color: var(--color-personal);">●</span>
+            <span class="category-name">Personal</span>
+            <span class="category-count" id="count-personal">0</span>
+          </li>
+          <li class="category-item" data-category="shopping">
+            <span class="category-icon" style="color: var(--color-shopping);">●</span>
+            <span class="category-name">Shopping</span>
+            <span class="category-count" id="count-shopping">0</span>
+          </li>
+          <li class="category-item" data-category="health">
+            <span class="category-icon" style="color: var(--color-health);">●</span>
+            <span class="category-name">Health</span>
+            <span class="category-count" id="count-health">0</span>
+          </li>
+          <li class="category-item" data-category="ideas">
+            <span class="category-icon" style="color: var(--color-ideas);">●</span>
+            <span class="category-name">Ideas</span>
+            <span class="category-count" id="count-ideas">0</span>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Motivational / Stats Card -->
+      <div class="motivation-card tiltable">
+        <div class="card-glow"></div>
+        <div class="motivation-content">
+          <div class="quote-header">DAILY SPARK</div>
+          <p class="quote-text" id="quote-box">"The secret of getting ahead is getting started."</p>
+          <div class="stats-mini">
+            <div class="stat-mini-item">
+              <span class="stat-num" id="stat-created-today">0</span>
+              <span class="stat-label">Added Today</span>
+            </div>
+            <div class="stat-mini-item">
+              <span class="stat-num" id="stat-done-today">0</span>
+              <span class="stat-label">Completed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Dashboard -->
+    <main class="main-dashboard">
+      
+      <!-- Top Action / Stats Header -->
+      <header class="dashboard-header">
+        <div class="header-welcome">
+          <h1 id="greeting">Hello, Creator</h1>
+          <p class="header-date" id="current-date">Tuesday, July 7, 2026</p>
+        </div>
+
+        <div class="header-controls">
+          <!-- Sound Toggle Button -->
+          <button id="sound-toggle" class="utility-btn magnetic" aria-label="Toggle Sound Feedback" title="Toggle Sound Feedback">
+            <svg class="icon-speaker-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <svg class="icon-speaker-off hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+
+          <!-- Theme Toggle Button -->
+          <button id="theme-toggle" class="utility-btn magnetic" aria-label="Toggle Theme" title="Toggle Theme">
+            <svg class="icon-sun hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <!-- SVG Progress Indicator -->
+          <div class="progress-ring-container" title="Overall Completion Progress">
+            <svg class="progress-ring" width="54" height="54">
+              <circle class="progress-ring-circle-bg" stroke="var(--color-border)" stroke-width="4.5" fill="transparent" r="22" cx="27" cy="27"/>
+              <circle class="progress-ring-circle" id="progress-circle" stroke="var(--color-primary)" stroke-width="4.5" fill="transparent" r="22" cx="27" cy="27"/>
+            </svg>
+            <span class="progress-percentage" id="progress-text">0%</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Input Section (Creation Form) -->
+      <section class="task-creation-panel">
+        <form id="todo-form" class="task-form">
+          <div class="form-row-main">
+            <div class="input-glow-wrapper">
+              <input type="text" id="task-title" placeholder="What needs to be done?" required maxlength="80" autocomplete="off">
+              <span class="input-glow-line"></span>
+            </div>
+            <button type="submit" id="add-task-btn" class="add-btn magnetic">
+              <span>Add Task</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+
+          <div class="form-row-details">
+            <!-- Description -->
+            <div class="detail-input-group desc-group">
+              <input type="text" id="task-desc" placeholder="Add details or notes..." maxlength="160" autocomplete="off">
+            </div>
+            
+            <!-- Category Selector -->
+            <div class="detail-input-group">
+              <select id="task-category-select">
+                <option value="personal">Personal</option>
+                <option value="work">Work</option>
+                <option value="shopping">Shopping</option>
+                <option value="health">Health</option>
+                <option value="ideas">Ideas</option>
+              </select>
+            </div>
+
+            <!-- Priority Selector -->
+            <div class="detail-input-group">
+              <select id="task-priority-select">
+                <option value="low">Low Priority</option>
+                <option value="medium" selected>Medium Priority</option>
+                <option value="high">High Priority</option>
+              </select>
+            </div>
+
+            <!-- Due Date Picker -->
+            <div class="detail-input-group date-group">
+              <input type="date" id="task-duedate" title="Due Date">
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Filter / Sort controls -->
+      <section class="filters-panel">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-input" placeholder="Search tasks..." autocomplete="off">
+          <button id="clear-search" class="clear-btn hidden" aria-label="Clear search">&times;</button>
+        </div>
+
+        <div class="sorting-filtering-controls">
+          <!-- Priority Filter Buttons -->
+          <div class="priority-filter-group">
+            <button class="priority-filter-btn active" data-priority="all">All</button>
+            <button class="priority-filter-btn" data-priority="high">High</button>
+            <button class="priority-filter-btn" data-priority="medium">Med</button>
+            <button class="priority-filter-btn" data-priority="low">Low</button>
+          </div>
+
+          <!-- Sort Dropdown -->
+          <div class="sort-wrapper">
+            <select id="sort-select" title="Sort Tasks">
+              <option value="date-new">Newest First</option>
+              <option value="date-old">Oldest First</option>
+              <option value="priority-desc">Priority: High to Low</option>
+              <option value="priority-asc">Priority: Low to High</option>
+              <option value="due-date">Due Date</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task Lists Grid -->
+      <section class="task-list-section">
+        <!-- Scrollable list viewport -->
+        <div class="task-scroll-container">
+          <ul id="task-list" class="task-list">
+            <!-- Dynamic Items go here -->
+          </ul>
+
+          <!-- Empty State -->
+          <div id="empty-state" class="empty-state hidden">
+            <div class="empty-state-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 12h8" stroke-linecap="round"/>
+                <path d="M12 8v8" stroke-linecap="round" class="empty-plus"/>
+              </svg>
+            </div>
+            <h3>No tasks found</h3>
+            <p>Go ahead and create a task to ignite your day!</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Script logic -->
+  <script src="index.js"></script>
+</body>
+</html>

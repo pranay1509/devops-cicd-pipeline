@@ -1,17 +1,17 @@
 {
-  "name": "app",
+  "name": "quantumtask-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend API server for QuantumTask application",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1"
-  }
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "private": true
 }
