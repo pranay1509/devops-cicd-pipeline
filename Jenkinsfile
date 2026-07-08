@@ -29,6 +29,14 @@ pipeline {
             }
         }
 
+        stage('Run Tests') {
+            steps {
+                dir('app') {
+                    sh 'npm test'
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t todo-app:latest ./app'
